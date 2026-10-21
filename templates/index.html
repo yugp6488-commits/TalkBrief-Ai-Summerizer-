@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T5 Text Summarizer</title>
+    <!-- Updated Browser Tab Title -->
+    <title>TalkBrief: Transformer-Based Summarizer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,16 +52,15 @@
 </head>
 <body>
     <div class="container">
-        <h1>AI Conversation Summarizer</h1>
+        <!-- Updated Webpage Header -->
+        <h1>TalkBrief: Transformer-Based Summarizer</h1>
         <p>Paste your dialogue below to generate a summary using your fine-tuned T5 model.</p>
         
-        <!-- Form posts back to FastAPI -->
         <form action="/summarize-ui" method="post">
             <textarea name="dialogue" placeholder="Enter conversation here..." required>{{ original_text or '' }}</textarea><br>
             <button type="submit">Summarize</button>
         </form>
 
-        <!-- Display summary block only if summary variable exists -->
         {% if summary %}
             <div class="result-box">
                 <h2>Generated Summary:</h2>
@@ -69,4 +69,4 @@
         {% endif %}
     </div>
 </body>
-</html> 
+</html>
