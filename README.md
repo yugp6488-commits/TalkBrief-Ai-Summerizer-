@@ -10,7 +10,7 @@ TalkBrief is an AI-powered web application designed to condense long dialogues, 
 * **Inference:** Uses PyTorch for dynamic tensor generation with parameters optimized for text summarization (`num_beams=4`, `length_penalty=0.3`, `early_stopping=True`).
 
 ## 🛠️ Tech Stack
-
+ 
 * **Backend:** FastAPI, Uvicorn
 * **Machine Learning:** Hugging Face `transformers`, PyTorch, Word2Vec
 * **Frontend:** Jinja2 Templates, HTML/CSS
