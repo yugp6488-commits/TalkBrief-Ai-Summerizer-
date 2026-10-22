@@ -1,8 +1,5 @@
-fastapi
-uvicorn
 transformers
 torch
-jinja2
-python-multipart
-pydantic
 sentencepiece
+gradio
+huggingface_hub<1.0
