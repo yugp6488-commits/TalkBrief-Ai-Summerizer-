@@ -49,7 +49,6 @@ except Exception as e:
     model = None
 
 
-# 3. Inference function
 @gpu_decorator
 def summarize(dialogue: str) -> str:
     if not dialogue or not dialogue.strip():
@@ -66,12 +65,14 @@ def summarize(dialogue: str) -> str:
     ).to(device)
 
     with torch.no_grad():
-        outputs = model.generate(
+        outputs = model.generate(          
             input_ids=inputs["input_ids"],
             attention_mask=inputs["attention_mask"],
-            max_length=150,
+            max_length=100,
+            min_length=15,
             num_beams=4,
-            length_penalty=0.3,
+            length_penalty=1.0,
+            no_repeat_ngram_size=3,
             early_stopping=True,
         )
 
