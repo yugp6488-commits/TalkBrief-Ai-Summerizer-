@@ -1,4 +1,5 @@
-<h1 <a href=https://huggingface.co/spaces/Preet1234/TalkBrief-AI-Summarizer>TalkBrief-Ai-Summerizer-></h1>
+<a href=https://huggingface.co/spaces/Preet1234/TalkBrief-AI-Summarizer>TalkBrief-Ai-Summerizer->
+
 
 **TalkBrief** is an open-source NLP project designed to generate concise, abstractive summaries from unstructured human conversations and chat transcripts. Built on Google's **T5-small** model and fine-tuned on the **SAMSum dataset**, TalkBrief extracts core information from multi-turn dialogues accurately and efficiently.
 
