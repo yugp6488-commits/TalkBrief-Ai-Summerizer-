@@ -3,7 +3,7 @@ from pathlib import Path
 import gradio as gr
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-# ZeroGPU support: use @spaces.GPU if available, otherwise do nothing
+
 try:
     import spaces
     gpu_decorator = spaces.GPU
@@ -11,18 +11,13 @@ except ImportError:
     def gpu_decorator(fn):
         return fn
 
-# ---------------------------------------------------------------
-# Settings you may need to change
-# ---------------------------------------------------------------
-# Set to True only if you trained with the "summarize: " prefix.
+
 USE_PREFIX = False
 PREFIX = "summarize: "
 
-# Base model used only as a tokenizer fallback (match what you fine-tuned)
 FALLBACK_TOKENIZER = "t5-small"
-# ---------------------------------------------------------------
 
-# 1. Setup device and model path
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "saved_summery_model"
@@ -42,7 +37,6 @@ def load_tokenizer():
     return AutoTokenizer.from_pretrained(FALLBACK_TOKENIZER)
 
 
-# 2. Load model and tokenizer
 try:
     tokenizer = load_tokenizer()
     model = AutoModelForSeq2SeqLM.from_pretrained(str(MODEL_PATH)).to(device)
@@ -54,7 +48,7 @@ except Exception as e:
     model = None
 
 
-# 3. Inference function
+
 @gpu_decorator
 def summarize(dialogue: str) -> str:
     if not dialogue or not dialogue.strip():
@@ -62,7 +56,7 @@ def summarize(dialogue: str) -> str:
     if model is None or tokenizer is None:
         return "Model failed to load properly. Check space logs."
 
-    # Clean the input (remove placeholder tokens not in the T5 vocabulary)
+
     dialogue = dialogue.replace("<file_gif>", "").strip()
 
     input_text = (PREFIX + dialogue) if USE_PREFIX else dialogue
@@ -89,7 +83,7 @@ def summarize(dialogue: str) -> str:
     return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
 
-# 4. Gradio interface
+
 demo = gr.Interface(
     fn=summarize,
     inputs=gr.Textbox(lines=8, placeholder="Paste dialogue here...", label="Input Dialogue"),
