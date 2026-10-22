@@ -3,6 +3,14 @@ from pathlib import Path
 import gradio as gr
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
+# ZeroGPU support: use @spaces.GPU if available, otherwise do nothing
+try:
+    import spaces
+    gpu_decorator = spaces.GPU
+except ImportError:
+    def gpu_decorator(fn):
+        return fn
+
 # 1. Setup device and model path
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 BASE_DIR = Path(__file__).resolve().parent
@@ -42,6 +50,7 @@ except Exception as e:
 
 
 # 3. Inference function
+@gpu_decorator
 def summarize(dialogue: str) -> str:
     if not dialogue or not dialogue.strip():
         return "Please enter a valid dialogue."
