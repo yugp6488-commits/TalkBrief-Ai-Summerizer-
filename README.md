@@ -37,7 +37,7 @@ TalkBrief-Ai-Summerizer/
 ├── saved_summery_model/       # Fine-tuned T5 weights and tokenizer files
 │   ├── config.json
 │   ├── generation_config.json
-│   ├── model.safetensors     # 242 MB model weights (tracked via Git LFS)
+│   ├── model.safetensors     # 242 MB model weights (tracked via Git LFS) 
 │   ├── spiece.model           # SentencePiece tokenizer model
 │   ├── tokenizer_config.json
 │   └── special_tokens_map.json
